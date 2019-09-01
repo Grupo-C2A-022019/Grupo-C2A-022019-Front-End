@@ -1,15 +1,21 @@
 # Grupo-C2A-022019-Front-End
 
-## Desarrollo
+## Development
 
-- Instalar dependencias
+- Install dependencies
 
 ```bash
 npm install
 ```
 
-- Correr servidor de desarrollo
+- Run dev server
 
 ```bash
 npm run dev
+```
+
+- Run tests
+
+```bash
+npm run test
 ```

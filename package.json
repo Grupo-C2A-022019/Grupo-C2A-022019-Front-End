@@ -10,6 +10,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^10.0.3",
+    "codacy-coverage": "^3.4.0",
     "cross-env": "^5.0.1",
     "eslint": "^6.3.0",
     "eslint-config-react-app": "^5.0.1",
@@ -21,10 +22,13 @@
     "eslint-plugin-react-hooks": "^2.0.1",
     "http-proxy-middleware": "^0.19.1",
     "husky": "^2.4.0",
+    "jest": "^24.9.0",
     "lint-staged": "^8.2.0",
     "prettier": "^1.18.2"
   },
   "scripts": {
+    "test": "jest --coverage",
+    "test-with-coverage": "jest --coverage && cat ./coverage/lcov.info | codacy-coverage",
     "dev": "cross-env NODE_ENV=development PORT=3000 node server.js",
     "build": "next build",
     "prod": "cross-env NODE_ENV=production PORT=3000 node server.js"
@@ -32,7 +36,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "pre-push": "npm test -- --coverage --watchAll=false"
+      "pre-push": "npm run test"
     }
   },
   "lint-staged": {
