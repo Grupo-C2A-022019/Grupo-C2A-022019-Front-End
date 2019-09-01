@@ -5,15 +5,48 @@
     "express": "^4.15.3",
     "next": "latest",
     "react": "^16.7.0",
-    "react-dom": "^16.7.0"
+    "react-dom": "^16.7.0",
+    "react-social-login": "^3.4.4"
   },
   "devDependencies": {
+    "babel-eslint": "^10.0.3",
     "cross-env": "^5.0.1",
-    "http-proxy-middleware": "^0.19.1"
+    "eslint": "^6.3.0",
+    "eslint-config-react-app": "^5.0.1",
+    "eslint-config-xo-nextjs": "^1.4.0",
+    "eslint-plugin-flowtype": "^4.2.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^2.0.1",
+    "http-proxy-middleware": "^0.19.1",
+    "husky": "^2.4.0",
+    "lint-staged": "^8.2.0",
+    "prettier": "^1.18.2"
   },
   "scripts": {
     "dev": "cross-env NODE_ENV=development PORT=3000 node server.js",
     "build": "next build",
     "prod": "cross-env NODE_ENV=production PORT=3000 node server.js"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm test -- --coverage --watchAll=false"
+    }
+  },
+  "lint-staged": {
+    "linters": {
+      "{pages,components,hooks,lib,util,utils}/**/*.{js,jsx,ts,tsx,json,css}": [
+        "prettier --write",
+        "eslint --fix",
+        "git add"
+      ]
+    },
+    "ignore": [
+      ".next/*",
+      "node_modules/*",
+      "**/dist/*.min.js"
+    ]
   }
 }
