@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { fetchOrders } from "lib/api";
+import useApi from "./useApi";
 
 /**
  *
@@ -11,9 +11,12 @@ export default function useOrders(options) {
   const [error, setError] = useState();
   const [loading, setLoading] = useState();
 
+  const api = useApi();
+
   useEffect(() => {
     setLoading(true);
-    fetchOrders(options)
+    api
+      .fetchOrders(options)
       .then(newOrders => {
         setOrders(newOrders);
         setLoading(false);
@@ -22,7 +25,7 @@ export default function useOrders(options) {
         setLoading(false);
         setError(e);
       });
-  }, [options]);
+  }, [api, options]);
 
   return [
     orders,
