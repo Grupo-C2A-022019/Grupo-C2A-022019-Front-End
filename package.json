@@ -28,8 +28,8 @@
     "prettier": "^1.18.2"
   },
   "scripts": {
-    "test": "jest --coverage",
-    "test-with-coverage": "jest --coverage && cat ./coverage/lcov.info | codacy-coverage",
+    "test": "jest --coverage --passWithNoTests",
+    "test-with-coverage": "jest --coverage --passWithNoTests && cat ./coverage/lcov.info | codacy-coverage",
     "dev": "cross-env NODE_ENV=development PORT=3000 node server.js",
     "build": "next build",
     "prod": "cross-env NODE_ENV=production PORT=3000 node server.js"
