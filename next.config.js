@@ -7,5 +7,11 @@ module.exports = {
     config.resolve.alias['hooks'] = path.join(__dirname, 'hooks')
     config.resolve.alias['lib'] = path.join(__dirname, 'lib')
     return config
+  },
+
+  serverRuntimeConfig: { // Will only be available on the server side
+  },
+  publicRuntimeConfig: { // Will be available on both server and client
+    apiUrl: process.env.API_URL || '/api'
   }
 }

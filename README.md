@@ -11,8 +11,10 @@ npm install
 - Run dev server
 
 ```bash
-npm run dev
+API_URL=http://<your-api-dev-server>/ npm run dev
 ```
+
+optionally you can omit environment variable API_URL and it will default to `http://localhost:8080/`
 
 - Run tests
 
