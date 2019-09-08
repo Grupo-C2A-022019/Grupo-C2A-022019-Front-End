@@ -12,6 +12,6 @@ module.exports = {
   serverRuntimeConfig: { // Will only be available on the server side
   },
   publicRuntimeConfig: { // Will be available on both server and client
-    apiUrl: process.env.API_URL || '/api'
+    apiUrl: process.env.NODE_ENV !== 'production' ? '/api' : process.env.API_URL
   }
 }
