@@ -2,19 +2,57 @@
   "name": "with-custom-reverse-proxy",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.19.0",
     "express": "^4.15.3",
     "google-map-react": "^1.1.4",
     "next": "latest",
+    "querystring": "^0.2.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0"
   },
   "devDependencies": {
+    "babel-eslint": "^10.0.3",
+    "codacy-coverage": "^3.4.0",
     "cross-env": "^5.0.1",
-    "http-proxy-middleware": "^0.19.1"
+    "eslint": "^6.3.0",
+    "eslint-config-react-app": "^5.0.1",
+    "eslint-config-xo-nextjs": "^1.4.0",
+    "eslint-plugin-flowtype": "^4.2.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^2.0.1",
+    "http-proxy-middleware": "^0.19.1",
+    "husky": "^2.4.0",
+    "jest": "^24.9.0",
+    "lint-staged": "^8.2.0",
+    "prettier": "^1.18.2"
   },
   "scripts": {
+    "test": "jest --coverage --passWithNoTests",
+    "test-with-coverage": "jest --coverage --passWithNoTests && cat ./coverage/lcov.info | codacy-coverage",
     "dev": "cross-env NODE_ENV=development PORT=3000 node server.js",
     "build": "next build",
     "prod": "cross-env NODE_ENV=production PORT=3000 node server.js"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm run test"
+    }
+  },
+  "lint-staged": {
+    "linters": {
+      "{pages,components,hooks,lib,util,utils}/**/*.{js,jsx,ts,tsx,json,css}": [
+        "prettier --write",
+        "eslint --fix",
+        "git add"
+      ]
+    },
+    "ignore": [
+      ".next/*",
+      "node_modules/*",
+      "**/dist/*.min.js"
+    ]
   }
 }

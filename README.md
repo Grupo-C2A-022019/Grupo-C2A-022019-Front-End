@@ -1,15 +1,23 @@
 # Grupo-C2A-022019-Front-End
 
-## Desarrollo
+## Development
 
-- Instalar dependencias
+- Install dependencies
 
 ```bash
 npm install
 ```
 
-- Correr servidor de desarrollo
+- Run dev server
 
 ```bash
-npm run dev
+API_URL=http://<your-api-dev-server>/ npm run dev
+```
+
+optionally you can omit environment variable API_URL and it will default to `http://localhost:8080/`
+
+- Run tests
+
+```bash
+npm run test
 ```

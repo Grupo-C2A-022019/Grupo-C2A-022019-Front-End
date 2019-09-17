@@ -4,7 +4,7 @@ const next = require('next')
 
 const devProxy = {
   '/api': {
-    target: 'http://localhost:8080/',
+    target: process.env.API_URL || 'http://localhost:8080/',
     pathRewrite: { '^/api': '/' },
     changeOrigin: true
   }
