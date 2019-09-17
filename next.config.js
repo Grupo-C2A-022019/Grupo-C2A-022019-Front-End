@@ -1,4 +1,5 @@
 const path = require('path')
+require('dotenv').config()
 
 module.exports = {
   webpack (config, options) {
@@ -12,6 +13,7 @@ module.exports = {
   serverRuntimeConfig: { // Will only be available on the server side
   },
   publicRuntimeConfig: { // Will be available on both server and client
-    apiUrl: process.env.NODE_ENV !== 'production' ? '/api' : process.env.API_URL
+    apiUrl: process.env.NODE_ENV !== 'production' ? '/api' : process.env.API_URL,
+    googleMapApiKey: process.env.GOOGLE_MAP_APIKEY
   }
 }
