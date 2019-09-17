@@ -3,6 +3,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.15.3",
+    "google-map-react": "^1.1.4",
     "next": "latest",
     "react": "^16.7.0",
     "react-dom": "^16.7.0"
