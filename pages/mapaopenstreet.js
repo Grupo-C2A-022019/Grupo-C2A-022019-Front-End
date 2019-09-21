@@ -7,5 +7,9 @@ const OpenStreetMap = dynamic(() => import("components/OpenStreetMap"), {
 });
 
 export default function() {
-  return <OpenStreetMap lat={-34.6063623} lng={-58.3835828} />;
+  return (
+    <div style={{ height: "100vh", display: "grid" }}>
+      <OpenStreetMap lat={-34.6063623} lng={-58.3835828} />
+    </div>
+  );
 }
