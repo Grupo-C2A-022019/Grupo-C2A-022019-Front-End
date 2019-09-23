@@ -1,65 +1,35 @@
-import React, { useMemo, useState, useEffect, useCallback } from "react";
-import { number } from "prop-types";
+import React, { Component } from "react";
 import { Map, TileLayer, Marker } from "react-leaflet";
-// eslint-disable-next-line no-unused-vars
+import RoutingMachine from "./RoutingMachine";
 import L from "leaflet";
 
-export default function LeafletExample({ lat, lng }) {
-  const [centerLat, setCenterLat] = useState(lat);
-  const [centerLng, setCenterLng] = useState(lng);
-
-  useEffect(() => {
-    if (Number.isFinite(lat)) {
-      setCenterLat(+lat);
-    }
-  }, [lat]);
-  useEffect(() => {
-    if (Number.isFinite(lng)) {
-      setCenterLng(+lng);
-    }
-  }, [lng]);
-
-  const [markerLat, setMarkerLat] = useState(lat);
-  const [markerLng, setMarkerLng] = useState(lng);
-
-  useEffect(() => {
-    if (Number.isFinite(lat)) {
-      setMarkerLat(+lat);
-    }
-  }, [lat]);
-  useEffect(() => {
-    if (Number.isFinite(lng)) {
-      setMarkerLng(+lng);
-    }
-  }, [lng]);
-
-  const [zoom] = useState(15);
-
-  const center = useMemo(() => ({ lat: centerLat, lng: centerLng }), [
-    centerLat,
-    centerLng
-  ]);
-
-  const marker = useMemo(() => ({ lat: markerLat, lng: markerLng }), [
-    markerLat,
-    markerLng
-  ]);
-
-  const updateMarkerPosition = useCallback(position => {
-    setMarkerLat(position.lat);
-    setMarkerLng(position.lng);
-  });
-
-  return (
-    <Map center={center} zoom={zoom}>
-      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-
-      <Marker position={marker} onPositionChange={updateMarkerPosition} />
-    </Map>
-  );
+class MapComponent extends Component {
+  state = {
+    lat: -34.6012307,
+    lng: -58.3975367,
+    zoom: 13
+  };
+  road = [
+    L.latLng(-34.6012307, -58.3975367),
+    L.latLng(-34.6257703, -58.3923897)
+  ];
+  map = React.createRef();
+  defaultIcon = L.icon({});
+  render() {
+    const position = [this.state.lat, this.state.lng];
+    return (
+      <Map center={position} zoom={this.state.zoom} ref={this.map}>
+        <TileLayer
+          attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        {this.road.map((point, index) => (
+          <Marker key={index} position={point} />
+        ))}
+        <RoutingMachine color="#000" map={this.map} road={this.road} />
+      </Map>
+    );
+  }
 }
 
-LeafletExample.propTypes = {
-  lat: number.isRequired,
-  lng: number.isRequired
-};
+export default MapComponent;
