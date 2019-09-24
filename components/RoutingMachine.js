@@ -7,17 +7,16 @@ import "leaflet-routing-machine/src";
  * http://www.liedman.net/leaflet-routing-machine/api/
  */
 class RoutingMachine extends MapLayer {
-  createLeafletElement() {
-    const {
-      leaflet: { map },
-      ...props
-    } = this.props;
-
-    let leafletElement = L.Routing.control({
+  createLeafletElement({ leaflet: { map }, ...props }) {
+    this.leafletElement = L.Routing.control({
       ...props
     }).addTo(map);
 
-    return leafletElement.getPlan();
+    return this.leafletElement.getPlan();
+  }
+
+  updateLeafletElement(fromProps, { waypoints }) {
+    this.leafletElement.setWaypoints(waypoints);
   }
 }
 
