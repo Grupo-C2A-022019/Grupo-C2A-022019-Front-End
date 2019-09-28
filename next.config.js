@@ -1,7 +1,8 @@
 const path = require('path')
 require('dotenv').config()
+const withImages = require('next-images')
 
-module.exports = {
+module.exports = withImages({
   webpack (config, options) {
     config.resolve.alias['components'] = path.join(__dirname, 'components')
     config.resolve.alias['contexts'] = path.join(__dirname, 'contexts')
@@ -16,4 +17,4 @@ module.exports = {
     apiUrl: process.env.NODE_ENV !== 'production' ? '/api' : process.env.API_URL,
     googleMapApiKey: process.env.GOOGLE_MAP_APIKEY
   }
-}
+})
