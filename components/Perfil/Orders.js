@@ -76,7 +76,7 @@ export default function Orders() {
             <TableCell>Name</TableCell>
             <TableCell>Ship To</TableCell>
             <TableCell>Payment Method</TableCell>
-            <TableCell align="right">Sale Amount</TableCell>
+            <TableCell align="left">Sale Amount</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -86,7 +86,7 @@ export default function Orders() {
               <TableCell>{row.name}</TableCell>
               <TableCell>{row.shipTo}</TableCell>
               <TableCell>{row.paymentMethod}</TableCell>
-              <TableCell align="right">{row.amount}</TableCell>
+              <TableCell align="left">{row.amount}</TableCell>
             </TableRow>
           ))}
         </TableBody>

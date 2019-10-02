@@ -1,8 +1,6 @@
 import React from "react";
 import Container from "@material-ui/core/Container";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
+
 import MenuDesplegable from "../components/Perfil/MenuDesplegable";
 import Orders from "../components/Perfil/Orders";
 import ToolBar from "../components/ToolBar";
@@ -25,9 +23,8 @@ export default function Perfil() {
       <ToolBar />
       <Container>
         <Orders />
-        <div className={classes.toolbarIcon}>
-          <MenuDesplegable />
-        </div>
+
+        <MenuDesplegable />
       </Container>
     </div>
   );
