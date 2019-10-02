@@ -1,5 +1,6 @@
 import React from "react";
 import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
 
 import MenuDesplegable from "../components/Perfil/MenuDesplegable";
 import Orders from "../components/Perfil/Orders";
@@ -21,11 +22,14 @@ export default function Perfil() {
   return (
     <div>
       <ToolBar />
-      <Container>
-        <Orders />
-
-        <MenuDesplegable />
-      </Container>
+      <Grid container spacing={3}>
+        <Grid item xs="2">
+          <MenuDesplegable />
+        </Grid>
+        <Grid item xs="9">
+          <Orders />
+        </Grid>
+      </Grid>
     </div>
   );
 }
