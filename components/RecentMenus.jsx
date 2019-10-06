@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { Typography } from "@material-ui/core";
 
+import I18n from "components/commons/I18n";
 import MenuList from "components/MenuList";
 
 import useApi from "hooks/useApi";
-import { Typography } from "@material-ui/core";
 
 export default function RecentMenus() {
   const [loading, setLoading] = useState(true);
@@ -20,7 +21,9 @@ export default function RecentMenus() {
 
   return (
     <>
-      <Typography>Nuevas Delicias</Typography>
+      <Typography>
+        <I18n id="recentMenus.title" />
+      </Typography>
       <MenuList menus={menus} variant="horizontal" loading={loading} />
     </>
   );

@@ -8,6 +8,7 @@ module.exports = withImages({
     config.resolve.alias['contexts'] = path.join(__dirname, 'contexts')
     config.resolve.alias['hooks'] = path.join(__dirname, 'hooks')
     config.resolve.alias['lib'] = path.join(__dirname, 'lib')
+    config.resolve.alias['static'] = path.join(__dirname, 'static')
     return config
   },
 
