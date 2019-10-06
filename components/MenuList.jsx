@@ -1,20 +1,54 @@
 import React from "react";
 import { oneOf, arrayOf, shape, number, bool } from "prop-types";
 
+import { makeStyles } from "@material-ui/core/styles";
+import GridList from "@material-ui/core/GridList";
+import GridListTile from "@material-ui/core/GridListTile";
+import GridListTileBar from "@material-ui/core/GridListTileBar";
+
+import IconButton from "@material-ui/core/IconButton";
+import StarBorderIcon from "@material-ui/icons/StarBorder";
+
 import I18n from "components/commons/I18n";
 
-export default function MenuList({ menus, loading }) {
+const useStyles = makeStyles(theme => ({
+  gridList: {
+    horizontal: {
+      flexWrap: "nowrap",
+      // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
+      transform: "translateZ(0)"
+    },
+    vertical: {
+      // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
+      transform: "translateZ(0)"
+    }
+  }
+}));
+
+export default function MenuList({ menus, loading, variant }) {
+  const classes = useStyles();
+
   return (
-    <ul>
+    <GridList className={classes.gridList[variant]}>
       {menus.map(menu => (
-        <li>menu: {menu.id}</li>
+        <GridListTile key={menu.id}>
+          <img src={menu.img} alt={menu.name} />
+          <GridListTileBar
+            title={menu.name}
+            actionIcon={
+              <IconButton aria-label={`star ${menu.name}`}>
+                <StarBorderIcon />
+              </IconButton>
+            }
+          />
+        </GridListTile>
       ))}
       {loading && (
-        <li>
-          <I18n id="menuList.loading" />
-        </li>
+        <GridListTile>
+          <GridListTileBar title={<I18n id="menuList.loading" />} />
+        </GridListTile>
       )}
-    </ul>
+    </GridList>
   );
 }
 
