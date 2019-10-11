@@ -7,12 +7,32 @@ import TextField from "components/form/field/TextField";
 import SubmitButton from "components/form/SubmitButton";
 
 import useApi from "hooks/useApi";
+import MonetaryAmountField from "components/form/field/MonetaryAmountField";
+
+// {
+//   name: "Milangas con pure",
+//   description: "Altas milangas papa",
+//   businessId: 6,
+//   categoryIds: [],
+//   startingDate: "2019-10-10",
+//   expirationDate: "2019-10-20",
+//   listPrice: {
+//     amount: 10,
+//     currency: "ARS"
+//   },
+//   bulkSize: 2,
+//   discountedPrice: {
+//     amount: 7,
+//     currency: "ARS"
+//   }
+// }
 
 export default function NewMenu() {
   const api = useApi();
 
   const handleSubmit = useCallback(
     menu => {
+      debugger;
       api.createMenu(menu);
     },
     [api]
@@ -21,27 +41,57 @@ export default function NewMenu() {
   return <NewMenuForm onSubmit={handleSubmit} />;
 }
 
+function format(d) {
+  return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+}
+
 function NewMenuForm(props) {
+  const now = new Date();
+  const startingDate = format(now);
+  const expirationDate = format(new Date(now.getTime() + 24 * 60 * 60 * 1000));
+
   return (
     <Formik
       validationSchema={Yup.object({
         name: Yup.string().required(),
+        description: Yup.string().required(),
         img: Yup.string().required(),
-        buiness: Yup.number().required(),
-        price: Yup.number().required(),
-        validity: Yup.object({
-          startingDate: Yup.date().required(),
-          expirationDate: Yup.date().required()
+        businessId: Yup.number()
+          .positive()
+          .required(),
+        categoryIds: Yup.array(Yup.number()),
+        startingDate: Yup.date().required(),
+        expirationDate: Yup.date().required(),
+        listPrice: Yup.object({
+          amount: Yup.number()
+            .positive()
+            .required(),
+          currency: Yup.string().required()
+        }).required(),
+        bulkSize: Yup.number().positive(),
+        discountedPrice: Yup.object({
+          amount: Yup.number()
+            .positive()
+            .required(),
+          currency: Yup.string().required()
         })
       })}
       initialValues={{
-        name: "",
-        img: "",
-        buiness: "",
-        price: "",
-        validity: {
-          startingDate: "2019-09-20",
-          expirationDate: "2019-09-21"
+        name: "Milangas con pure",
+        description: "Altas milangas papa",
+        img: "http://google.com/",
+        businessId: 6,
+        categoryIds: [],
+        startingDate,
+        expirationDate,
+        listPrice: {
+          amount: 20,
+          currency: "ARS"
+        },
+        bulkSize: 20,
+        discountedPrice: {
+          amount: 10,
+          currency: "ARS"
         }
       }}
       {...props}
@@ -56,6 +106,12 @@ function NewMenuForm(props) {
         <Field
           fullWidth
           component={TextField}
+          label={<I18n id="menu.new.form.description" />}
+          name="description"
+        />
+        <Field
+          fullWidth
+          component={TextField}
           label={<I18n id="menu.new.form.img" />}
           name="img"
         />
@@ -63,28 +119,34 @@ function NewMenuForm(props) {
           fullWidth
           component={TextField}
           label={<I18n id="menu.new.form.buiness" />}
-          name="buiness"
+          name="businessId"
           type="number"
         />
         <Field
           fullWidth
-          component={TextField}
+          component={MonetaryAmountField}
           label={<I18n id="menu.new.form.price" />}
-          name="price"
-          type="number"
+          name="listPrice"
+        />
+        <Field name="bulkSize" type="number" component={TextField} />
+        <Field
+          fullWidth
+          component={MonetaryAmountField}
+          label={<I18n id="menu.new.form.price" />}
+          name="discountedPrice"
         />
         <Field
           fullWidth
           component={TextField}
           label={<I18n id="menu.new.form.validity.startingDate" />}
-          name="validity.startingDate"
+          name="startingDate"
           type="date"
         />
         <Field
           fullWidth
           component={TextField}
           label={<I18n id="menu.new.form.business" />}
-          name="validity.expirationDate"
+          name="expirationDate"
           type="date"
         />
         <SubmitButton variant="contained" color="primary" type="submit">
