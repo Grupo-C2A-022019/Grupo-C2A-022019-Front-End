@@ -14,6 +14,7 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
+import NextLink from "next/link";
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -99,7 +100,11 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <NextLink href="/perfil">
+          <span>Profile</span>
+        </NextLink>
+      </MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
     </Menu>
   );
@@ -131,6 +136,7 @@ export default function PrimarySearchAppBar() {
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
+
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           aria-label="account of current user"
@@ -157,9 +163,13 @@ export default function PrimarySearchAppBar() {
           >
             <MenuIcon />
           </IconButton>
+
           <Typography className={classes.title} variant="h6" noWrap>
-            Viandas Ya!
+            <NextLink href="/start">
+              <span> Viandas Ya!</span>
+            </NextLink>
           </Typography>
+
           <div className={classes.search}>
             <div className={classes.searchIcon}></div>
           </div>
