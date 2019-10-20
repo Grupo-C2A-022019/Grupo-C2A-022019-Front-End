@@ -1,9 +1,10 @@
 import React, { useCallback } from "react";
 import getConfig from "next/config";
+import FacebookLogin from "react-facebook-login";
 
 import useAuth from "hooks/useAuth";
 
-export default function FacebookLogin() {
+export default function FacebookLoginButton() {
   const {
     publicRuntimeConfig: { facebookAppId }
   } = getConfig();
@@ -20,7 +21,6 @@ export default function FacebookLogin() {
   return (
     !isLoggedIn && (
       <FacebookLogin
-        autoLoad
         appId={facebookAppId}
         fields="name,email,picture"
         callback={responseFacebook}
