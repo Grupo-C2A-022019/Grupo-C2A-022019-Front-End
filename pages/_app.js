@@ -9,6 +9,7 @@ import { ApiProvider } from "contexts/api";
 import { I18nProvider } from "contexts/i18n";
 import { getMessages } from "lib/i18n";
 import initialMessages from "static/messages_es.json";
+import { AuthProvider } from "contexts/auth";
 
 class MyApp extends App {
   static async getInitialProps({ Component, router, ctx }) {
@@ -43,19 +44,25 @@ class MyApp extends App {
     );
   };
 
+  setUser = auth => {
+    this.setState(prevState => ({ ...prevState, auth }));
+  };
+
   render() {
     const { Component, pageProps } = this.props;
-    const { messages } = this.state;
+    const { messages, auth } = this.state;
 
     return (
-      <I18nProvider messages={messages} onLangChange={this.setLang}>
-        <ThemeProvider theme={theme}>
-          <ApiProvider api={api}>
-            <CssBaseline />
-            <Component {...pageProps} />
-          </ApiProvider>
-        </ThemeProvider>
-      </I18nProvider>
+      <AuthProvider auth={auth} setAuth={this.setUser}>
+        <I18nProvider messages={messages} onLangChange={this.setLang}>
+          <ThemeProvider theme={theme}>
+            <ApiProvider api={api}>
+              <CssBaseline />
+              <Component {...pageProps} />
+            </ApiProvider>
+          </ThemeProvider>
+        </I18nProvider>
+      </AuthProvider>
     );
   }
 }
