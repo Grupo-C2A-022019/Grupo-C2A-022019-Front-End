@@ -17,6 +17,11 @@ export default function HomePage() {
             <I18n id="menu.new" />
           </Button>
         </Link>
+        <Link href="/businesses/new">
+          <Button variant="contained" color="primary">
+            <I18n id="business.new" />
+          </Button>
+        </Link>
         <RecentMenus />
       </Container>
     </>

@@ -2,6 +2,10 @@
   "recentMenus.title": "Nuevas Delicias",
   "menuList.loading": "Obteniendo Menuses...",
 
+  "business.new": "Abrir Tienda",
+  
+  "business.new.form.name": "Nombre",
+
   "menu.new": "Publicar",
 
   "menu.new.form.name": "Nombre",

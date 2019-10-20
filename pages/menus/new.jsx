@@ -1,25 +1,29 @@
 import React, { useCallback } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
+import { useRouter } from "next/router";
+import { Container } from "@material-ui/core";
 
 import I18n from "components/commons/I18n";
 import TextField from "components/form/field/TextField";
 import SubmitButton from "components/form/SubmitButton";
-
-import useApi from "hooks/useApi";
 import MonetaryAmountField from "components/form/field/MonetaryAmountField";
 import ToolBar from "components/ToolBar";
-import { Container } from "@material-ui/core";
+
+import useApi from "hooks/useApi";
 
 export default function NewMenu() {
   const api = useApi();
+  const { push } = useRouter();
 
   const handleSubmit = useCallback(
-    menu => {
-      debugger;
-      api.createMenu(menu);
-    },
-    [api]
+    (menu, { setErrors, setSubmitting }) =>
+      api
+        .createMenu(menu)
+        .then(({ id }) => push(`/menus/${id}`, `/menus/${id}`))
+        .catch(setErrors)
+        .finally(() => setSubmitting(false)),
+    [api, push]
   );
 
   return (
@@ -146,7 +150,7 @@ function NewMenuForm(props) {
           name="expirationDate"
           type="date"
         />
-        <SubmitButton variant="contained" color="primary" type="submit">
+        <SubmitButton>
           <I18n id="menu.new" />
         </SubmitButton>
       </Form>
