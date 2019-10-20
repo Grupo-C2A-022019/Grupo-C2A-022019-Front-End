@@ -8,6 +8,7 @@
   "menu.new.form.img": "Imagen",
   "menu.new.form.buiness": "Servicio",
   "menu.new.form.price": "Precio",
+  "menu.new.form.bulkSize": "Cantidad minima de descuento",
   "menu.new.form.validity.startingDate": "Disponible desde",
   "menu.new.form.validity.expirationDate": "Disponible hasta"
 }

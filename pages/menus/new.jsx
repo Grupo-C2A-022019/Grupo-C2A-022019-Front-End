@@ -8,24 +8,8 @@ import SubmitButton from "components/form/SubmitButton";
 
 import useApi from "hooks/useApi";
 import MonetaryAmountField from "components/form/field/MonetaryAmountField";
-
-// {
-//   name: "Milangas con pure",
-//   description: "Altas milangas papa",
-//   businessId: 6,
-//   categoryIds: [],
-//   startingDate: "2019-10-10",
-//   expirationDate: "2019-10-20",
-//   listPrice: {
-//     amount: 10,
-//     currency: "ARS"
-//   },
-//   bulkSize: 2,
-//   discountedPrice: {
-//     amount: 7,
-//     currency: "ARS"
-//   }
-// }
+import ToolBar from "components/ToolBar";
+import { Container } from "@material-ui/core";
 
 export default function NewMenu() {
   const api = useApi();
@@ -38,7 +22,14 @@ export default function NewMenu() {
     [api]
   );
 
-  return <NewMenuForm onSubmit={handleSubmit} />;
+  return (
+    <>
+      <ToolBar />
+      <Container>
+        <NewMenuForm onSubmit={handleSubmit} />;
+      </Container>
+    </>
+  );
 }
 
 function format(d) {
@@ -128,7 +119,13 @@ function NewMenuForm(props) {
           label={<I18n id="menu.new.form.price" />}
           name="listPrice"
         />
-        <Field name="bulkSize" type="number" component={TextField} />
+        <Field
+          fullWidth
+          component={TextField}
+          type="number"
+          label={<I18n id="menu.new.form.bulkSize" />}
+          name="bulkSize"
+        />
         <Field
           fullWidth
           component={MonetaryAmountField}
