@@ -11,6 +11,8 @@ import { getMessages } from "lib/i18n";
 import initialMessages from "static/messages_es.json";
 import { AuthProvider } from "contexts/auth";
 
+const LOCAL_STORAGE_AUTH_KEY = "auth";
+
 class MyApp extends App {
   static async getInitialProps({ Component, router, ctx }) {
     let pageProps = {};
@@ -25,7 +27,15 @@ class MyApp extends App {
   constructor(props) {
     super(props);
 
+    let initialAuth;
+    if (process.browser) {
+      try {
+        initialAuth = JSON.parse(localStorage.getItem(LOCAL_STORAGE_AUTH_KEY));
+      } catch {}
+    }
+
     this.state = {
+      auth: initialAuth,
       messages: props.initialMessages
     };
   }
@@ -45,6 +55,7 @@ class MyApp extends App {
   };
 
   setUser = auth => {
+    localStorage.setItem(LOCAL_STORAGE_AUTH_KEY, JSON.stringify(auth));
     this.setState(prevState => ({ ...prevState, auth }));
   };
 
