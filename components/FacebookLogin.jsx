@@ -1,8 +1,12 @@
 import React, { useCallback } from "react";
+import getConfig from "next/config";
 
 import useAuth from "hooks/useAuth";
 
 export default function FacebookLogin() {
+  const {
+    publicRuntimeConfig: { facebookAppId }
+  } = getConfig();
   const [{ jwtToken }, setAuth] = useAuth();
   const isLoggedIn = !!jwtToken;
 
@@ -17,7 +21,7 @@ export default function FacebookLogin() {
     !isLoggedIn && (
       <FacebookLogin
         autoLoad
-        appId="663245730866918"
+        appId={facebookAppId}
         fields="name,email,picture"
         callback={responseFacebook}
       />
