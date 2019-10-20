@@ -1,38 +1,26 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import FacebookLogin from "react-facebook-login";
+import React, { useCallback } from "react";
 
-export default class Facebook extends React.Component {
-  state = {
-    isLoggedIn: false,
-    userID: "",
-    name: "",
-    email: "",
-    picture: ""
-  };
+import useAuth from "hooks/useAuth";
 
-  responseFacebook = response => {
-    console.log(response);
-  };
+export default function FacebookLogin() {
+  const [{ jwtToken }, setAuth] = useAuth();
+  const isLoggedIn = !!jwtToken;
 
-  componentClicker = () => console.log("culo");
-  render() {
-    let fbContent;
+  const responseFacebook = useCallback(
+    ({ signedRequest }) => {
+      setAuth({ jwtToken: signedRequest });
+    },
+    [setAuth]
+  );
 
-    if (this.state.isLoggedIn) {
-      fbContent = null;
-    } else {
-      fbContent = (
-        <FacebookLogin
-          appId="663245730866918"
-          autoLoad={true}
-          fields="name,email,picture"
-          onClick={this.componentClicked}
-          callback={this.responseFacebook}
-        />
-      );
-    }
-
-    return <div>{fbContent}</div>;
-  }
+  return (
+    !isLoggedIn && (
+      <FacebookLogin
+        autoLoad
+        appId="663245730866918"
+        fields="name,email,picture"
+        callback={responseFacebook}
+      />
+    )
+  );
 }
