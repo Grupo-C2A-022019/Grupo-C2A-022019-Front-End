@@ -20,7 +20,7 @@ export default function NewBusiness() {
       api
         .createBusiness(business)
         .then(({ id }) => push(`/businesses/${id}`, `/businesses/${id}`))
-        .catch(setErrors)
+        .catch(e => console.log(e))
         .finally(() => setSubmitting(false)),
     [api, push]
   );
@@ -52,7 +52,7 @@ function NewBusinessForm({ onSubmit }) {
         urlServ: "",
         email: "",
         tel: "",
-        hora_y_dia: ""
+        schedule: ""
       }}
       validationSchema={Yup.object({
         name: Yup.string().required(),
@@ -65,7 +65,7 @@ function NewBusinessForm({ onSubmit }) {
         tel: Yup.number()
           .positive()
           .required(),
-        hora_y_dia: Yup.string().required()
+        schedule: Yup.string().required()
       })}
     >
       <Form>
@@ -78,38 +78,38 @@ function NewBusinessForm({ onSubmit }) {
         <Field
           fullWidth
           component={TextField}
-          label={<I18n id="menu.new.form.img" />}
+          label={<I18n id="business.new.form.img" />}
           name="img"
         />
         <Field
           fullWidth
           component={TextField}
-          label={<I18n id="menu.new.form.description" />}
+          label={<I18n id="business.new.form.description" />}
           name="description"
         />
         <Field
           fullWidth
           component={TextField}
-          label={<I18n id="menu.new.form.urlServ" />}
+          label={<I18n id="business.new.form.urlServ" />}
           name="urlServ"
         />
         <Field
           fullWidth
           component={TextField}
-          label={<I18n id="menu.new.form.email" />}
+          label={<I18n id="business.new.form.email" />}
           name="email"
         />
         <Field
           fullWidth
           component={TextField}
-          label={<I18n id="menu.new.form.tel" />}
+          label={<I18n id="business.new.form.tel" />}
           name="tel"
         />
         <Field
           fullWidth
           component={TextField}
-          label={<I18n id="menu.new.form.hora_y_dia" />}
-          name="hora_y_dia"
+          label={<I18n id="business.new.form.schedule" />}
+          name="schedule"
         />
         <SubmitButton>
           <I18n id="business.new" />

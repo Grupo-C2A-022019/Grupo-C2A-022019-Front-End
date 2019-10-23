@@ -9,6 +9,7 @@ import TextField from "components/form/field/TextField";
 import SubmitButton from "components/form/SubmitButton";
 import MonetaryAmountField from "components/form/field/MonetaryAmountField";
 import ToolBar from "components/ToolBar";
+import OwnBusinessesSelectorField from "components/form/field/OwnBusinessesSelectorField";
 
 import useApi from "hooks/useApi";
 
@@ -112,10 +113,9 @@ function NewMenuForm(props) {
         />
         <Field
           fullWidth
-          component={TextField}
-          label={<I18n id="menu.new.form.buiness" />}
+          component={OwnBusinessesSelectorField}
+          label={<I18n id="menu.new.form.business" />}
           name="businessId"
-          type="number"
         />
         <Field
           fullWidth
