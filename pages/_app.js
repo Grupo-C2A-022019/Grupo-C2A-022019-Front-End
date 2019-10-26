@@ -13,6 +13,7 @@ import { AuthProvider } from "contexts/auth";
 import { ShoppingCartProvider } from "contexts/shoppingCart";
 
 const LOCAL_STORAGE_AUTH_KEY = "auth";
+const LOCAL_STORAGE_CART_KEY = "shoppingCart";
 
 class MyApp extends App {
   static async getInitialProps({ Component, router, ctx }) {
@@ -35,8 +36,18 @@ class MyApp extends App {
       } catch {}
     }
 
+    let initialShoppingCart;
+    if (process.browser) {
+      try {
+        initialShoppingCart = JSON.parse(
+          localStorage.getItem(LOCAL_STORAGE_CART_KEY)
+        );
+      } catch {}
+    }
+
     this.state = {
-      auth: initialAuth
+      auth: initialAuth,
+      initialShoppingCart: initialShoppingCart || []
     };
   }
 
@@ -50,10 +61,14 @@ class MyApp extends App {
 
   render() {
     const { initialMessages, Component, pageProps } = this.props;
-    const { auth } = this.state;
+    const { auth, initialShoppingCart } = this.state;
 
     return (
-      <AppState initialAuth={auth} initialMessages={initialMessages}>
+      <AppState
+        initialAuth={auth}
+        initialMessages={initialMessages}
+        initialShoppingCart={initialShoppingCart}
+      >
         <CssBaseline />
         <Component {...pageProps} />
       </AppState>
@@ -63,7 +78,12 @@ class MyApp extends App {
 
 export default MyApp;
 
-function AppState({ initialAuth, initialMessages, children }) {
+function AppState({
+  initialAuth,
+  initialMessages,
+  initialShoppingCart,
+  children
+}) {
   const [auth, setAuth] = useState(initialAuth);
 
   const setUser = useCallback(newAuth => {
@@ -77,10 +97,15 @@ function AppState({ initialAuth, initialMessages, children }) {
     getMessages(lang).then(setMessages);
   }, []);
 
-  const [shoppingCart, setShoppingCart] = useState([]);
+  const [shoppingCart, setShoppingCart] = useState(initialShoppingCart);
 
   const addToCart = useCallback(menu => {
-    setShoppingCart(oldShoppingCart => oldShoppingCart.concat(menu));
+    setShoppingCart(oldShoppingCart => {
+      const newCart = oldShoppingCart.concat(menu);
+      localStorage.setItem(LOCAL_STORAGE_CART_KEY, JSON.stringify(newCart));
+
+      return newCart;
+    });
   }, []);
 
   return (
