@@ -1,5 +1,5 @@
 import App from "next/app";
-import React from "react";
+import React, { useState, useCallback } from "react";
 import { ThemeProvider } from "@material-ui/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
@@ -10,6 +10,7 @@ import { I18nProvider } from "contexts/i18n";
 import { getMessages } from "lib/i18n";
 import initialMessages from "static/messages_es.json";
 import { AuthProvider } from "contexts/auth";
+import { ShoppingCartProvider } from "contexts/shoppingCart";
 
 const LOCAL_STORAGE_AUTH_KEY = "auth";
 
@@ -35,8 +36,7 @@ class MyApp extends App {
     }
 
     this.state = {
-      auth: initialAuth,
-      messages: props.initialMessages
+      auth: initialAuth
     };
   }
 
@@ -48,34 +48,50 @@ class MyApp extends App {
     }
   }
 
-  setLang = lang => {
-    getMessages(lang).then(messages =>
-      this.setState(prevState => ({ ...prevState, messages }))
-    );
-  };
-
-  setUser = auth => {
-    localStorage.setItem(LOCAL_STORAGE_AUTH_KEY, JSON.stringify(auth));
-    this.setState(prevState => ({ ...prevState, auth }));
-  };
-
   render() {
-    const { Component, pageProps } = this.props;
-    const { messages, auth } = this.state;
+    const { initialMessages, Component, pageProps } = this.props;
+    const { auth } = this.state;
 
     return (
-      <AuthProvider auth={auth} setAuth={this.setUser}>
-        <I18nProvider messages={messages} onLangChange={this.setLang}>
-          <ThemeProvider theme={theme}>
-            <ApiProvider api={api}>
-              <CssBaseline />
-              <Component {...pageProps} />
-            </ApiProvider>
-          </ThemeProvider>
-        </I18nProvider>
-      </AuthProvider>
+      <AppState initialAuth={auth} initialMessages={initialMessages}>
+        <CssBaseline />
+        <Component {...pageProps} />
+      </AppState>
     );
   }
 }
 
 export default MyApp;
+
+function AppState({ initialAuth, initialMessages, children }) {
+  const [auth, setAuth] = useState(initialAuth);
+
+  const setUser = useCallback(newAuth => {
+    localStorage.setItem(LOCAL_STORAGE_AUTH_KEY, JSON.stringify(newAuth));
+    setAuth(newAuth);
+  }, []);
+
+  const [messages, setMessages] = useState(initialMessages);
+
+  const setLang = useCallback(lang => {
+    getMessages(lang).then(setMessages);
+  }, []);
+
+  const [shoppingCart, setShoppingCart] = useState([]);
+
+  const addToCart = useCallback(menu => {
+    setShoppingCart(oldShoppingCart => oldShoppingCart.concat(menu));
+  }, []);
+
+  return (
+    <AuthProvider auth={auth} setAuth={setUser}>
+      <I18nProvider messages={messages} onLangChange={setLang}>
+        <ShoppingCartProvider shoppingCart={shoppingCart} addToCart={addToCart}>
+          <ThemeProvider theme={theme}>
+            <ApiProvider api={api}>{children}</ApiProvider>
+          </ThemeProvider>
+        </ShoppingCartProvider>
+      </I18nProvider>
+    </AuthProvider>
+  );
+}
