@@ -43,7 +43,7 @@
   "scripts": {
     "test": "jest --coverage --passWithNoTests",
     "test-with-coverage": "jest --coverage --passWithNoTests && cat ./coverage/lcov.info | codacy-coverage",
-    "dev": "cross-env NODE_ENV=development PORT=3000 node server.js",
+    "dev": "cross-env NODE_ENV=development PORT=3000 node --inspect server.js",
     "build": "next build",
     "prod": "cross-env NODE_ENV=production PORT=3000 node server.js"
   },
