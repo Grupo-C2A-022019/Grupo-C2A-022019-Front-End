@@ -1,16 +1,11 @@
 import React from "react";
-import {
-  FormControl,
-  InputLabel,
-  FormHelperText,
-  Input
-} from "@material-ui/core";
 import { ErrorMessage, getIn } from "formik";
+
+import TextInput from "components/commons/input/TextInput";
 
 export default function TextField({
   form: { errors, touched },
   field,
-  label,
   ...props
 }) {
   const { name } = field;
@@ -19,17 +14,10 @@ export default function TextField({
   const touch = !!getIn(touched, name);
 
   return (
-    <FormControl {...props} error={error && touch}>
-      <InputLabel htmlFor={name}>{label}</InputLabel>
-      <Input
-        id={name}
-        aria-describedby={`${name}-helper-text`}
-        {...field}
-        {...props}
-      />
-      <FormHelperText id={`${name}-helper-text`}>
-        <ErrorMessage name={name} />
-      </FormHelperText>
-    </FormControl>
+    <TextInput
+      {...field}
+      {...props}
+      error={error && touch && <ErrorMessage name={name} />}
+    />
   );
 }

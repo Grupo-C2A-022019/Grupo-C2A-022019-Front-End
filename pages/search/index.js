@@ -1,36 +1,23 @@
-import React, { useCallback, useEffect, useState } from "react";
-import Link from "next/link";
+import React, { useCallback } from "react";
+import { Container } from "@material-ui/core";
 
-import { Button, Container } from "@material-ui/core";
+import debounce from "lib/debounce";
 
 import SearchBox from "components/commons/SearchBox";
-import I18n from "components/commons/I18n";
 import ToolBar from "components/ToolBar";
-import useSearch from "hooks/useSearch";
 
-const tiempo = 500;
-let timeout;
+import useSearch from "hooks/useSearch";
 
 export default function SearchPage() {
   const [results, search] = useSearch();
 
-  const triggerSearch = useCallback(
-    ({ target: { value } }) => {
-      if (timeout) {
-        clearTimeout(timeout);
-      }
-      timeout = setTimeout(() => {
-        search(value);
-      }, tiempo);
-    },
-    [search]
-  );
+  const onSearch = useCallback(debounce(search, 500), [search]);
 
   return (
     <>
       <ToolBar />
       <Container>
-        <SearchBox onSearch={triggerSearch} />
+        <SearchBox onSearch={onSearch} />
         <SearchResults results={results} />a
       </Container>
     </>

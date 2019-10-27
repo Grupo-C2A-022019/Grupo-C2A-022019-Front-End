@@ -1,28 +1,28 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { string, bool, func } from "prop-types";
-import { Formik, Form, Field } from "formik";
+import React, { useCallback } from "react";
+import { func } from "prop-types";
 
 import I18n from "components/commons/I18n";
-import TextField from "components/form/field/TextField";
+import TextInput from "components/commons/input/TextInput";
 
-export default function SearchBox({ onSearch, ...props }) {
+export default function SearchBox({ onSearch }) {
+  const onChange = useCallback(({ target: { value } }) => onSearch(value), [
+    onSearch
+  ]);
+
   return (
-    <div>
-      <Formik>
-        <Form>
-          <Field
-            fullWidth
-            name="searchTerm"
-            component={TextField}
-            onChange={onSearch}
-            label={<I18n id="search.label" />}
-          />
-        </Form>
-      </Formik>
-    </div>
+    <TextInput
+      fullWidth
+      name="searchTerm"
+      onChange={onChange}
+      label={<I18n id="search.label" />}
+    />
   );
 }
 
-SearchBox.propTypes = {};
+SearchBox.propTypes = {
+  onSearch: func
+};
 
-SearchBox.defaultProps = {};
+SearchBox.defaultProps = {
+  onSearch: () => {}
+};
