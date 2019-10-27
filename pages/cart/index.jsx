@@ -1,7 +1,9 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { string, bool, func } from "prop-types";
+import React from "react";
+import { Container, Button } from "@material-ui/core";
+
 import ToolBar from "components/ToolBar";
-import { Container } from "@material-ui/core";
+import I18n from "components/commons/I18n";
+
 import useShoppingCart from "hooks/useShoppingCart";
 
 export default function ShoppingCartPage() {
@@ -10,6 +12,7 @@ export default function ShoppingCartPage() {
       <ToolBar />
       <Container>
         <ShoppingCart />
+        <OrderButton />
       </Container>
     </>
   );
@@ -36,5 +39,22 @@ function ShoppingCart() {
         </div>
       ))}
     </div>
+  );
+}
+
+function OrderButton() {
+  const { shoppingCart, createOrder } = useShoppingCart();
+
+  const isEmpty = !shoppingCart.length;
+
+  return (
+    <Button
+      onClick={createOrder}
+      variant="contained"
+      color="primary"
+      disabled={isEmpty}
+    >
+      <I18n id="cart.order" />
+    </Button>
   );
 }
