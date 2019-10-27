@@ -45,15 +45,8 @@ function ShoppingCart() {
 function OrderButton() {
   const { shoppingCart, createOrder } = useShoppingCart();
 
-  const isEmpty = !shoppingCart.length;
-
   return (
-    <Button
-      onClick={createOrder}
-      variant="contained"
-      color="primary"
-      disabled={isEmpty}
-    >
+    <Button onClick={createOrder} variant="contained" color="primary">
       <I18n id="cart.order" />
     </Button>
   );

@@ -111,11 +111,16 @@ function AppState({
   return (
     <AuthProvider auth={auth} setAuth={setUser}>
       <I18nProvider messages={messages} onLangChange={setLang}>
-        <ShoppingCartProvider shoppingCart={shoppingCart} addToCart={addToCart}>
-          <ThemeProvider theme={theme}>
-            <ApiProvider api={api}>{children}</ApiProvider>
-          </ThemeProvider>
-        </ShoppingCartProvider>
+        <ThemeProvider theme={theme}>
+          <ApiProvider api={api}>
+            <ShoppingCartProvider
+              shoppingCart={shoppingCart}
+              addToCart={addToCart}
+            >
+              {children}
+            </ShoppingCartProvider>
+          </ApiProvider>
+        </ThemeProvider>
       </I18nProvider>
     </AuthProvider>
   );
