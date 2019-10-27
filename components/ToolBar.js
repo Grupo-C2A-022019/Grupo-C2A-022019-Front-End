@@ -8,11 +8,18 @@ import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import MenuIcon from "@material-ui/icons/Menu";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import NextLink from "next/link";
+
+import I18n from "components/commons/I18n";
+
+import useShoppingCart from "hooks/useShoppingCart";
+
+import routes from "constants/routes";
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -50,13 +57,13 @@ const useStyles = makeStyles(theme => ({
   },
   sectionDesktop: {
     display: "none",
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("sm")]: {
       display: "flex"
     }
   },
   sectionMobile: {
     display: "flex",
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("sm")]: {
       display: "none"
     }
   }
@@ -118,6 +125,7 @@ export default function ToolBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
+      <ShoppingCartMenuItem />
       <MenuItem>
         <IconButton aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="secondary">
@@ -172,6 +180,9 @@ export default function ToolBar() {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
+            <NextLink href={routes.shoppingCart}>
+              <ShoppingCartButton />
+            </NextLink>
             <IconButton
               edge="end"
               aria-label="account of current user"
@@ -198,5 +209,30 @@ export default function ToolBar() {
       {renderMobileMenu}
       {renderMenu}
     </div>
+  );
+}
+
+function ShoppingCartButton(props) {
+  const { shoppingCart } = useShoppingCart();
+
+  return (
+    <IconButton edge="end" color="inherit" {...props}>
+      <Badge badgeContent={shoppingCart.length} color="error">
+        <ShoppingCartIcon />
+      </Badge>
+    </IconButton>
+  );
+}
+
+function ShoppingCartMenuItem() {
+  return (
+    <NextLink href={routes.shoppingCart}>
+      <MenuItem>
+        <ShoppingCartButton />
+        <p>
+          <I18n id="toolbar.shoppingCart" />
+        </p>
+      </MenuItem>
+    </NextLink>
   );
 }

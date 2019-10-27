@@ -5,6 +5,7 @@ const withImages = require('next-images')
 module.exports = withImages({
   webpack (config, options) {
     config.resolve.alias['components'] = path.join(__dirname, 'components')
+    config.resolve.alias['constants'] = path.join(__dirname, 'constants')
     config.resolve.alias['contexts'] = path.join(__dirname, 'contexts')
     config.resolve.alias['hooks'] = path.join(__dirname, 'hooks')
     config.resolve.alias['lib'] = path.join(__dirname, 'lib')
