@@ -5,7 +5,10 @@ export default function useSearch() {
   const api = useApi();
   const [results, setResults] = useState([]);
 
-  const search = useCallback(searchTerm => api.search(searchTerm), [api]);
+  const search = useCallback(
+    searchTerm => api.search(searchTerm).then(setResults),
+    [api]
+  );
 
   return [results, search];
 }
