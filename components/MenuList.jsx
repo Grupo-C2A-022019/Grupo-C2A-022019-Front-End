@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { oneOf, arrayOf, shape, number, bool } from "prop-types";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -33,14 +34,16 @@ export default function MenuList({ menus, loading, variant }) {
       {menus.map(menu => (
         <GridListTile key={menu.id}>
           <img src={menu.img} alt={menu.name} />
-          <GridListTileBar
-            title={menu.name}
-            actionIcon={
-              <IconButton aria-label={`star ${menu.name}`}>
-                <StarBorderIcon />
-              </IconButton>
-            }
-          />
+          <Link href={`/menus/${menu.id}`}>
+            <GridListTileBar
+              title={menu.name}
+              actionIcon={
+                <IconButton aria-label={`star ${menu.name}`}>
+                  <StarBorderIcon />
+                </IconButton>
+              }
+            />
+          </Link>
         </GridListTile>
       ))}
       {loading && (
