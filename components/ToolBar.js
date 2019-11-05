@@ -215,9 +215,14 @@ export default function ToolBar() {
 function ShoppingCartButton(props) {
   const { shoppingCart } = useShoppingCart();
 
+  const cartCount = Object.values(shoppingCart).reduce(
+    (acc, { amount }) => acc + amount,
+    0
+  );
+
   return (
     <IconButton edge="end" color="inherit" {...props}>
-      <Badge badgeContent={shoppingCart.length} color="error">
+      <Badge badgeContent={cartCount} color="error">
         <ShoppingCartIcon />
       </Badge>
     </IconButton>
