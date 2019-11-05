@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { Button, Container } from "@material-ui/core";
 
+import TrendingMenus from "components/TrendingMenus";
 import RecentMenus from "components/RecentMenus";
 import I18n from "components/commons/I18n";
 import ToolBar from "components/ToolBar";
@@ -23,6 +24,7 @@ export default function HomePage() {
           </Button>
         </Link>
         <RecentMenus />
+        <TrendingMenus />
       </Container>
     </>
   );
