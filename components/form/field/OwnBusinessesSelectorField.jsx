@@ -21,5 +21,21 @@ export default function OwnBusinessesSelectorField(props) {
       .finally(() => setLoading(false));
   }, [api, setFieldError, name]);
 
-  return <SelectorField {...props} options={options} loading={loading} />;
+  return (
+    <SelectorField
+      {...props}
+      options={options}
+      loading={loading}
+      getOptionLabel={getOptionLabel}
+      getOptionValue={getOptionValue}
+    />
+  );
+}
+
+function getOptionLabel({ id, name }) {
+  return `${name} (${id})`;
+}
+
+function getOptionValue({ id }) {
+  return id;
 }

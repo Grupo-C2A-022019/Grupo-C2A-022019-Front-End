@@ -13,6 +13,8 @@ export default function SelectorField({
   field,
   label,
   options,
+  getOptionLabel,
+  getOptionValue,
   ...props
 }) {
   const { name } = field;
@@ -24,9 +26,9 @@ export default function SelectorField({
     <FormControl {...props} error={error && touch}>
       <InputLabel htmlFor={field.name}>{label}</InputLabel>
       <Select {...field}>
-        {options.map(({ value, label }) => (
-          <MenuItem key={value} value={value}>
-            {label}
+        {options.map(option => (
+          <MenuItem key={getOptionValue(option)} value={getOptionValue(option)}>
+            {getOptionLabel(option)}
           </MenuItem>
         ))}
       </Select>
@@ -38,5 +40,7 @@ export default function SelectorField({
 }
 
 SelectorField.defaultProps = {
-  options: []
+  options: [],
+  getOptionLabel: ({ label }) => label,
+  getOptionValue: ({ value }) => value
 };

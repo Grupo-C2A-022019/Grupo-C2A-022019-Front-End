@@ -101,7 +101,30 @@ function AppState({
 
   const addToCart = useCallback(menu => {
     setShoppingCart(oldShoppingCart => {
-      const newCart = oldShoppingCart.concat(menu);
+      const amount = (oldShoppingCart[menu.id] || { amount: 0 }).amount + 1;
+
+      const newCart = {
+        ...oldShoppingCart,
+        [menu.id]: {
+          menu,
+          amount
+        }
+      };
+
+      localStorage.setItem(LOCAL_STORAGE_CART_KEY, JSON.stringify(newCart));
+
+      return newCart;
+    });
+  }, []);
+
+  const removeFromCart = useCallback(({ id }) => {
+    setShoppingCart(oldShoppingCart => {
+      const newCart = {
+        ...oldShoppingCart
+      };
+
+      delete newCart[id];
+
       localStorage.setItem(LOCAL_STORAGE_CART_KEY, JSON.stringify(newCart));
 
       return newCart;
@@ -116,6 +139,7 @@ function AppState({
             <ShoppingCartProvider
               shoppingCart={shoppingCart}
               addToCart={addToCart}
+              remove={removeFromCart}
             >
               {children}
             </ShoppingCartProvider>
