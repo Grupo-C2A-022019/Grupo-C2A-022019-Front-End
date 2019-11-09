@@ -1,3 +1,5 @@
 export default {
-    shoppingCart: "/cart"
+    shoppingCart: "/cart",
+    statements:"/statements",
+    start:"/"
 }

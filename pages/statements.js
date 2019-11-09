@@ -1,20 +1,18 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
-
-import Profile from "components/Profile";
 import ToolBar from "components/ToolBar";
+import StatementList from "components/commons/StatementList";
 
-import useProfile from "hooks/useProfile";
+import useStatements from "hooks/useStatements";
 
 export default function ProfilePage() {
-  const [profile] = useProfile();
+  const [statements] = useStatements();
+
   return (
     <div>
       <ToolBar />
       <Grid container>
-        <Grid item xs="12">
-          {profile && <Profile {...profile} />}
-        </Grid>
+        <StatementList statements={statements} />
       </Grid>
     </div>
   );

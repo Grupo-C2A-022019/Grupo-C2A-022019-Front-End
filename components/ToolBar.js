@@ -152,7 +152,9 @@ export default function ToolBar() {
         >
           <AccountCircle />
         </IconButton>
-        <p>Profile</p>
+        <NextLink href="/perfil">
+          <span>Profile</span>
+        </NextLink>
       </MenuItem>
     </Menu>
   );
@@ -170,7 +172,7 @@ export default function ToolBar() {
           </IconButton>
 
           <Typography className={classes.title} variant="h6" noWrap>
-            <NextLink href="/start">
+            <NextLink href={routes.start}>
               <span> Viandas Ya!</span>
             </NextLink>
           </Typography>

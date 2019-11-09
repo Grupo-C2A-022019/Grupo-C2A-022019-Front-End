@@ -16,9 +16,12 @@ export default function StatementList({ statements }) {
         </TableRow>
       </TableHead>
       <TableBody>
-        {statements.map(({ amount }) => (
+        {statements.map(statement => (
           <TableRow>
-            <TableCell>{amount}</TableCell>
+            <TableCell>
+              {statement.invoice.total.amount}
+              {statement.invoice.total.currency}
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>
