@@ -4,23 +4,34 @@ import {
   TableHead,
   TableBody,
   TableRow,
-  TableCell
+  TableCell,
+  Typography
 } from "@material-ui/core";
+
+import MonetaryAmount from "components/commons/MonetaryAmount";
+import I18n from "components/commons/I18n";
 
 export default function StatementList({ statements }) {
   return (
     <Table>
       <TableHead>
         <TableRow>
-          <TableCell>foo</TableCell>
+          <TableCell>
+            <I18n id="statement.description.label" />
+          </TableCell>
+          <TableCell>
+            <I18n id="statement.amount.label" />
+          </TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
-        {statements.map(statement => (
-          <TableRow>
+        {statements.map(({ amount: { currency, amount }, description, id }) => (
+          <TableRow key={id}>
             <TableCell>
-              {statement.invoice.total.amount}
-              {statement.invoice.total.currency}
+              <Typography>{description}</Typography>
+            </TableCell>
+            <TableCell>
+              <MonetaryAmount currency={currency} amount={amount} />
             </TableCell>
           </TableRow>
         ))}

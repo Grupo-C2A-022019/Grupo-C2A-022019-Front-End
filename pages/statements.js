@@ -9,11 +9,13 @@ export default function ProfilePage() {
   const [statements] = useStatements();
 
   return (
-    <div>
+    <>
       <ToolBar />
       <Grid container>
-        <StatementList statements={statements} />
+        <Grid item xs={9}>
+          <StatementList statements={statements} />
+        </Grid>
       </Grid>
-    </div>
+    </>
   );
 }

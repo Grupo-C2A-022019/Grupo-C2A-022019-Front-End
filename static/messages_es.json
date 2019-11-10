@@ -19,5 +19,10 @@
 
   "shoppingCart.menu.name": "Producto",
   "shoppingCart.menu.amount": "Cantidad",
-  "shoppingCart.menu.listPrice": "Precio Unidad"
+  "shoppingCart.menu.listPrice": "Precio Unidad",
+
+  "statement.description.label": "Descripción",
+  "statement.amount.label": "Monto",
+
+  "back": "Volver"
 }
