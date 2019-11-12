@@ -5,6 +5,7 @@ import debounce from "lib/debounce";
 
 import SearchBox from "components/commons/SearchBox";
 import ToolBar from "components/ToolBar";
+import MenuList from "components/MenuList";
 
 import useSearch from "hooks/useSearch";
 
@@ -18,12 +19,12 @@ export default function SearchPage() {
       <ToolBar />
       <Container>
         <SearchBox onSearch={onSearch} />
-        <SearchResults results={results} />a
+        <SearchResults results={results} />
       </Container>
     </>
   );
 }
 
 function SearchResults({ results }) {
-  return results.map(({ id, name }) => <div key={id}>{name}</div>);
+  return <MenuList menus={results} variant="horizontal" />;
 }
