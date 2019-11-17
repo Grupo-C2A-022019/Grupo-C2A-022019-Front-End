@@ -9,6 +9,10 @@
 
   "menu.new": "Publicar",
 
+  "menu.listPrice.label": "Precio de lista",
+  "menu.discountedPrice.label": "Descuento especial",
+  "menu.addToCart": "Agregar al carrito",
+
   "menu.new.form.name": "Nombre",
   "menu.new.form.img": "Imagen",
   "menu.new.form.buiness": "Servicio",
