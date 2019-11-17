@@ -131,6 +131,13 @@ function AppState({
     });
   }, []);
 
+  const clearCart = useCallback(() => {
+    const newCart = {};
+    setShoppingCart(newCart);
+    localStorage.setItem(LOCAL_STORAGE_CART_KEY, JSON.stringify(newCart));
+    return newCart;
+  }, []);
+
   return (
     <AuthProvider auth={auth} setAuth={setUser}>
       <I18nProvider messages={messages} onLangChange={setLang}>
@@ -140,6 +147,7 @@ function AppState({
               shoppingCart={shoppingCart}
               addToCart={addToCart}
               remove={removeFromCart}
+              clear={clearCart}
             >
               {children}
             </ShoppingCartProvider>

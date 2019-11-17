@@ -4,7 +4,7 @@ import useApi from "hooks/useApi";
 
 const ShoppingCartContext = createContext();
 
-export function ShoppingCartProvider({ shoppingCart, addToCart, remove, children }) {
+export function ShoppingCartProvider({ shoppingCart, addToCart, remove, clear, children }) {
   const api = useApi();
   const createOrder = useCallback(() => api.createOrder(shoppingCart), [
     api,
@@ -13,7 +13,7 @@ export function ShoppingCartProvider({ shoppingCart, addToCart, remove, children
  
   return (
     <ShoppingCartContext.Provider
-      value={{ shoppingCart, addToCart, createOrder, remove }}
+      value={{ shoppingCart, addToCart, createOrder, remove, clear }}
     >
       {children}
     </ShoppingCartContext.Provider>

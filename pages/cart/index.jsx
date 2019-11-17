@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import {
   Container,
   Button,
@@ -12,6 +12,7 @@ import {
   Paper
 } from "@material-ui/core";
 import Close from "@material-ui/icons/Close";
+import { useRouter } from "next/router";
 
 import ToolBar from "components/ToolBar";
 import I18n from "components/commons/I18n";
@@ -119,10 +120,31 @@ function AccountResume() {
 }
 
 function OrderButton() {
-  const { shoppingCart, createOrder } = useShoppingCart();
+  const { push } = useRouter();
+  const { createOrder, clear } = useShoppingCart();
+
+  const [disabled, setDisabled] = useState(false);
+
+  const placeOrder = useCallback(() => {
+    setDisabled(true);
+    createOrder()
+      .then(([{ id }]) => {
+        push(`/orders/${id}`);
+      })
+      .then(clear)
+      .catch(e => {
+        setDisabled(false);
+        throw e;
+      });
+  }, [createOrder, clear, push]);
 
   return (
-    <Button onClick={createOrder} variant="contained" color="primary">
+    <Button
+      onClick={placeOrder}
+      variant="contained"
+      color="primary"
+      disabled={disabled}
+    >
       <I18n id="cart.order" />
     </Button>
   );
