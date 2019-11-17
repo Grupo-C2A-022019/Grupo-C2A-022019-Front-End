@@ -4,7 +4,13 @@
   "menuList.loading": "Obteniendo Menuses...",
 
   "business.new": "Abrir Tienda",
+  "business.menu.new.label": "Publicar",
   
+  "business.urlServ.label": "Pagina del vendedor",
+  "business.email.label": "Email de contacto",
+  "business.schedule.label": "Horarios",
+  "business.telephone.label": "Telefono",
+
   "business.new.form.name": "Nombre",
 
   "cart.order": "Ordenar!",
