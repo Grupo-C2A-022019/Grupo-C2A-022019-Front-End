@@ -12,7 +12,8 @@ import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles({
   card: {
-    minWidth: 275
+    minWidth: 275,
+    maxWidth: 345
   },
   bullet: {
     display: "inline-block",
@@ -27,7 +28,7 @@ const useStyles = makeStyles({
   }
 });
 
-export default function Balance({ amount, currency }) {
+export default function Balance({ amount, currency, title, leyenda }) {
   const classes = useStyles();
 
   return (
@@ -38,15 +39,16 @@ export default function Balance({ amount, currency }) {
           color="textSecondary"
           gutterBottom
         >
-          Billetera
+          {title}
         </Typography>
         <Typography variant="h5" component="h2">
+          {currency}
           {amount}
         </Typography>
       </CardContent>
       <CardActions>
         <NextLink href={routes.statements}>
-          <Button size="small">Historial de compras</Button>
+          <Button size="small">{leyenda}</Button>
         </NextLink>
       </CardActions>
     </Card>

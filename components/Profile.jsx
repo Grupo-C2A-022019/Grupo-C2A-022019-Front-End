@@ -33,7 +33,12 @@ export default function Profile({
           <Avatar alt="Remy Sharp" src={image} className={classes.bigAvatar} />
         </Grid>
         <Grid container xs="6" alignItems="flex-start" justify="flex-end">
-          <Balance amount={amount} currency={currency} />
+          <Balance
+            amount={amount}
+            currency={currency}
+            title="Billetera"
+            leyenda="Historial de compra"
+          />
         </Grid>
       </Grid>
       <Grid container justify="left" alignItems="left">
