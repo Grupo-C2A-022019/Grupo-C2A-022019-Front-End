@@ -94,7 +94,7 @@ function Order({ menuId }) {
   );
 
   return (
-    <Formik initialValues={{ menuId, amount: 1 }} onSubmit={placeOrder}>
+    <Formik initialValues={{ menu:{id:menuId}, amount: 1 }} onSubmit={placeOrder}>
       <Form>
         <Grid container direction="column" spacing={2}>
           <Grid item>
