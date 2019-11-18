@@ -36,9 +36,9 @@ function MenuDetails({ id }) {
         <Paper>
           {menu && (
             <>
+              <Image src={menu.img} alt="menu" height="15em" />
               <Typography variant="h3">{menu.name}</Typography>
               <Typography variant="h4">{menu.description}</Typography>
-              <Image src={menu.img} alt="menu" />
             </>
           )}
         </Paper>

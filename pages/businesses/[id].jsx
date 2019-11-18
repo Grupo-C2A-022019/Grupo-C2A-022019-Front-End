@@ -33,41 +33,38 @@ function BusinessDetails({ id }) {
   const [business] = useBusiness(id);
 
   return (
-    <Grid container spacing={3}>
-      <Grid item xs={12} sm={9}>
-        <Paper>
-          {business && (
-            <>
+    <Paper>
+      {business && (
+        <>
+          <Image src={business.img} alt="business" height="10em" />
+          <Grid container justify="space-between" alignItems="center">
+            <Grid item>
               <Typography variant="h3">{business.name}</Typography>
               <Typography variant="h4">{business.description}</Typography>
-              <Image src={business.img} alt="business" />
-
-              <Typography variant="h5">
-                <I18n id="business.urlServ.label" />
-              </Typography>
-              <Typography>{business.urlServ}</Typography>
-              <Typography variant="h5">
-                <I18n id="business.email.label" />
-              </Typography>
-              <Typography>{business.email}</Typography>
-              <Typography variant="h5">
-                <I18n id="business.schedule.label" />
-              </Typography>
-              <Typography>{business.schedule}</Typography>
-              <Typography variant="h5">
-                <I18n id="business.telephone.label" />
-              </Typography>
-              <Typography>{business.telephone}</Typography>
-            </>
-          )}
-        </Paper>
-      </Grid>
-      <Grid item xs={12} sm={3}>
-        <Paper>
-          <PublishMenuButton businessId={id} />
-        </Paper>
-      </Grid>
-    </Grid>
+            </Grid>
+            <Grid item>
+              <PublishMenuButton businessId={id} />
+            </Grid>
+          </Grid>
+          <Typography variant="h5">
+            <I18n id="business.urlServ.label" />
+          </Typography>
+          <Typography>{business.urlServ}</Typography>
+          <Typography variant="h5">
+            <I18n id="business.email.label" />
+          </Typography>
+          <Typography>{business.email}</Typography>
+          <Typography variant="h5">
+            <I18n id="business.schedule.label" />
+          </Typography>
+          <Typography>{business.schedule}</Typography>
+          <Typography variant="h5">
+            <I18n id="business.telephone.label" />
+          </Typography>
+          <Typography>{business.telephone}</Typography>
+        </>
+      )}
+    </Paper>
   );
 }
 
@@ -75,7 +72,7 @@ function PublishMenuButton({ businessId }) {
   const { push } = useRouter();
 
   const publishMenu = useCallback(() => {
-    push(`/menus/new?businessId=${businessId}`);
+    push(`/menus/new?bu sinessId=${businessId}`);
   }, [push, businessId]);
 
   return (
