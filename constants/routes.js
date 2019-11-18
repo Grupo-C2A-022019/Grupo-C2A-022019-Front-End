@@ -1,5 +1,5 @@
 export default {
-    shoppingCart: "/cart",
+    order: (id) => `/orders/${id}`,
     statements:"/statements",
     start:"/"
 }

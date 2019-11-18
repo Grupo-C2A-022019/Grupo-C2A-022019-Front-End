@@ -1,5 +1,5 @@
 import App from "next/app";
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback } from "react";
 import { ThemeProvider } from "@material-ui/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
@@ -10,10 +10,8 @@ import { I18nProvider } from "contexts/i18n";
 import { getMessages } from "lib/i18n";
 import initialMessages from "static/messages_es.json";
 import { AuthProvider } from "contexts/auth";
-import { ShoppingCartProvider } from "contexts/shoppingCart";
 
 const LOCAL_STORAGE_AUTH_KEY = "auth";
-const LOCAL_STORAGE_CART_KEY = "shoppingCart";
 
 class MyApp extends App {
   static async getInitialProps({ Component, router, ctx }) {
@@ -36,18 +34,8 @@ class MyApp extends App {
       } catch {}
     }
 
-    let initialShoppingCart;
-    if (process.browser) {
-      try {
-        initialShoppingCart = JSON.parse(
-          localStorage.getItem(LOCAL_STORAGE_CART_KEY)
-        );
-      } catch {}
-    }
-
     this.state = {
-      auth: initialAuth,
-      initialShoppingCart: initialShoppingCart || []
+      auth: initialAuth
     };
   }
 
@@ -61,14 +49,10 @@ class MyApp extends App {
 
   render() {
     const { initialMessages, Component, pageProps } = this.props;
-    const { auth, initialShoppingCart } = this.state;
+    const { auth } = this.state;
 
     return (
-      <AppState
-        initialAuth={auth}
-        initialMessages={initialMessages}
-        initialShoppingCart={initialShoppingCart}
-      >
+      <AppState initialAuth={auth} initialMessages={initialMessages}>
         <CssBaseline />
         <Component {...pageProps} />
       </AppState>
@@ -78,12 +62,7 @@ class MyApp extends App {
 
 export default MyApp;
 
-function AppState({
-  initialAuth,
-  initialMessages,
-  initialShoppingCart,
-  children
-}) {
+function AppState({ initialAuth, initialMessages, children }) {
   const [auth, setAuth] = useState(initialAuth);
 
   const setUser = useCallback(newAuth => {
@@ -97,61 +76,11 @@ function AppState({
     getMessages(lang).then(setMessages);
   }, []);
 
-  const [shoppingCart, setShoppingCart] = useState(initialShoppingCart);
-
-  const addToCart = useCallback(menu => {
-    setShoppingCart(oldShoppingCart => {
-      const amount = (oldShoppingCart[menu.id] || { amount: 0 }).amount + 1;
-
-      const newCart = {
-        ...oldShoppingCart,
-        [menu.id]: {
-          menu,
-          amount
-        }
-      };
-
-      localStorage.setItem(LOCAL_STORAGE_CART_KEY, JSON.stringify(newCart));
-
-      return newCart;
-    });
-  }, []);
-
-  const removeFromCart = useCallback(({ id }) => {
-    setShoppingCart(oldShoppingCart => {
-      const newCart = {
-        ...oldShoppingCart
-      };
-
-      delete newCart[id];
-
-      localStorage.setItem(LOCAL_STORAGE_CART_KEY, JSON.stringify(newCart));
-
-      return newCart;
-    });
-  }, []);
-
-  const clearCart = useCallback(() => {
-    const newCart = {};
-    setShoppingCart(newCart);
-    localStorage.setItem(LOCAL_STORAGE_CART_KEY, JSON.stringify(newCart));
-    return newCart;
-  }, []);
-
   return (
     <AuthProvider auth={auth} setAuth={setUser}>
       <I18nProvider messages={messages} onLangChange={setLang}>
         <ThemeProvider theme={theme}>
-          <ApiProvider api={api}>
-            <ShoppingCartProvider
-              shoppingCart={shoppingCart}
-              addToCart={addToCart}
-              remove={removeFromCart}
-              clear={clearCart}
-            >
-              {children}
-            </ShoppingCartProvider>
-          </ApiProvider>
+          <ApiProvider api={api}>{children}</ApiProvider>
         </ThemeProvider>
       </I18nProvider>
     </AuthProvider>

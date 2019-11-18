@@ -12,14 +12,12 @@
   "business.telephone.label": "Telefono",
 
   "business.new.form.name": "Nombre",
-
-  "cart.order": "Ordenar!",
-
+  
   "menu.new": "Publicar",
+  "menu.order": "Ordenar!",
 
   "menu.listPrice.label": "Precio de lista",
   "menu.discountedPrice.label": "Descuento especial",
-  "menu.addToCart": "Agregar al carrito",
 
   "menu.new.form.name": "Nombre",
   "menu.new.form.img": "Imagen",
@@ -28,10 +26,6 @@
   "menu.new.form.bulkSize": "Cantidad minima de descuento",
   "menu.new.form.validity.startingDate": "Disponible desde",
   "menu.new.form.validity.expirationDate": "Disponible hasta",
-
-  "shoppingCart.menu.name": "Producto",
-  "shoppingCart.menu.amount": "Cantidad",
-  "shoppingCart.menu.listPrice": "Precio Unidad",
 
   "statement.description.label": "Descripción",
   "statement.amount.label": "Monto",
