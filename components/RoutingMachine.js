@@ -10,7 +10,7 @@ class RoutingMachine extends MapLayer {
   createLeafletElement({ leaflet: { map }, ...props }) {
     this.leafletElement = L.Routing.control({
       ...props
-    }).addTo(map);
+    });
 
     return this.leafletElement.getPlan();
   }

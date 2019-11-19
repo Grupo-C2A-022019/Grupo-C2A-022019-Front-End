@@ -1,22 +1,23 @@
-import React, { useMemo } from "react";
-import { Map, TileLayer } from "react-leaflet";
-import RoutingMachine from "./RoutingMachine";
-import L from "leaflet";
+import React from "react";
+import { render } from "react-dom";
+import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 
-function OpenStreetMap() {
-  const waypoints = useMemo(() => [
-    L.latLng(-34.6012307, -58.3975367),
-    L.latLng(-34.6257703, -58.3923897)
-  ]);
-
-  const bounds = useMemo(() => L.latLngBounds(...waypoints), [waypoints]);
-
+export default function Mapa({ lat, lng }) {
+  debugger;
+  const position = [lat, lng];
   return (
-    <Map bounds={bounds}>
-      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-      <RoutingMachine waypoints={waypoints} />
+    <Map center={position} zoom={13}>
+      <TileLayer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+      />
+      <Marker position={position}>
+        <Popup>
+          A pretty CSS3 popup.
+          <br />
+          Easily customizable.
+        </Popup>
+      </Marker>
     </Map>
   );
 }
-
-export default OpenStreetMap;

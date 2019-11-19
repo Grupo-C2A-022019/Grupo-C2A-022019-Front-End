@@ -13,7 +13,7 @@ import Typography from "@material-ui/core/Typography";
 const useStyles = makeStyles({
   card: {
     minWidth: 275,
-    maxWidth: 345
+    maxWidth: 300
   },
   bullet: {
     display: "inline-block",
@@ -34,14 +34,10 @@ export default function Balance({ amount, currency, title, leyenda }) {
   return (
     <Card className={classes.card}>
       <CardContent>
-        <Typography
-          className={classes.title}
-          color="textSecondary"
-          gutterBottom
-        >
+        <Typography variant="h3" component="h3" gutterBottom>
           {title}
         </Typography>
-        <Typography variant="h5" component="h2">
+        <Typography variant="h3" component="h2">
           {currency}
           {amount}
         </Typography>
