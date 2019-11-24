@@ -17,7 +17,6 @@ module.exports = withImages({
   },
   publicRuntimeConfig: { // Will be available on both server and client
     apiUrl: process.env.NODE_ENV !== 'production' ? '/api' : process.env.API_URL,
-    googleMapApiKey: process.env.GOOGLE_MAP_APIKEY,
-    facebookAppId: process.env.FACEBOOK_APP_ID
+    googleMapApiKey: process.env.GOOGLE_MAP_APIKEY
   }
 })
