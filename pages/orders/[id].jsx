@@ -36,7 +36,7 @@ export default function Order() {
   );
 }
 
-function OrderDetails({id}) {
+function OrderDetails({ id }) {
   const [order] = useOrder(id);
   const classes = useStyles();
 
@@ -45,42 +45,46 @@ function OrderDetails({id}) {
   });
 
   return (
-    <Grid>
-    <Typography gutterBottom variant="h2" component="h1">
-      Orden:
+    <>
+      <Typography gutterBottom variant="h2" component="h1">
+        Orden:
     </Typography>
-    <Grid container direction="row"  justify="flex-start">
-      <Card className={classes.card}>
-              {order &&(
+      <Grid container spacing="3">
+        <Grid item xs="12" sm="4">
+          <Card className={classes.card}>
+            {order && (
               <CardMedia
                 className={classes.media}
                 image={order.menu.img}
                 title={order.menu.name}
               />
-              )}
-              {order &&(
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="h2">
-              {order.menu.name}
-              </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-                {order.menu.description}
-              </Typography>
-            </CardContent>
-        )}
-      </Card>
-        {order&&(
-        <Balance
-            amount={order.amount}
-            title="Cantidad:"
-          /> 
-        )}
-        {order &&
-          <div style={{ height: "30vh", display: "grid",width:"25%" }}>
-            <OpenStreetMap lat={order.lat} lng={order.lng} />
-          </div>
-        }
-    </Grid> 
-    </Grid>
+            )}
+            {order && (
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="h2">
+                  {order.menu.name}
+                </Typography>
+                <Typography variant="body2" color="textSecondary" component="p">
+                  {order.menu.description}
+                </Typography>
+              </CardContent>
+            )}
+          </Card>
+        </Grid>
+        <Grid item xs="12" sm="4">
+          {order && (
+            <Balance
+              amount={order.amount}
+              title="Cantidad:"
+            />
+          )}
+        </Grid>
+        <Grid item container xs="12" sm="4" alignItems="stretch">
+          {order &&
+              <OpenStreetMap lat={order.lat} lng={order.lng} />
+          }
+        </Grid>
+      </Grid>
+    </>
   );
 }
