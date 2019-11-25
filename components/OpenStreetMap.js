@@ -3,7 +3,6 @@ import { render } from "react-dom";
 import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 
 export default function Mapa({ lat, lng }) {
-  debugger;
   const position = [lat, lng];
   return (
     <Map center={position} zoom={13} style={{ width: "100%" }}>
