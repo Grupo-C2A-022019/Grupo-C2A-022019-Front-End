@@ -10,7 +10,7 @@ import {
 
 import MonetaryAmount from "components/commons/MonetaryAmount";
 import I18n from "components/commons/I18n";
-import Rating from "components/commons/Rating";
+import Rating from "components/commons/RatingInput";
 
 export default function StatementList({ statements }) {
   return (
@@ -34,9 +34,7 @@ export default function StatementList({ statements }) {
             <TableCell>
               <MonetaryAmount currency={currency} amount={amount} />
             </TableCell>
-            <TableCell>
-              <Rating name={description} />
-            </TableCell>
+            <TableCell></TableCell>
           </TableRow>
         ))}
       </TableBody>

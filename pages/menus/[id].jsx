@@ -7,6 +7,7 @@ import ToolBar from "components/ToolBar";
 import I18n from "components/commons/I18n";
 import MonetaryAmount from "components/commons/MonetaryAmount";
 import Image from "components/commons/Image";
+import RatingInfo from "components/commons/RatingInfo"
 
 import useMenu from "hooks/useMenu";
 import useApi from "hooks/useApi";
@@ -56,7 +57,7 @@ function MenuDetails({ id }) {
                   amount={menu.listPrice.amount}
                 />
               </Grid>
-
+              <RatingInfo value={menu.puntuacion}/>
               {menu.discountedPrice && (
                 <Grid item>
                   <Typography>
