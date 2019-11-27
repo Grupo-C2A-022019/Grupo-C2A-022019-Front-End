@@ -4,8 +4,6 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 
-import FacebookLogin from "components/FacebookLoginButton";
-
 import Link from "components/commons/Link";
 
 export default function About() {
@@ -24,7 +22,6 @@ export default function About() {
         >
           Go to the main page
         </Button>
-        <FacebookLogin />
       </Box>
     </Container>
   );
