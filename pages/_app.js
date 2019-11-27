@@ -9,7 +9,6 @@ import { ApiProvider } from "contexts/api";
 import { I18nProvider } from "contexts/i18n";
 import { getMessages } from "lib/i18n";
 import initialMessages from "static/messages_es.json";
-import { AuthProvider } from "contexts/auth";
 
 const LOCAL_STORAGE_AUTH_KEY = "auth";
 
@@ -63,13 +62,6 @@ class MyApp extends App {
 export default MyApp;
 
 function AppState({ initialAuth, initialMessages, children }) {
-  const [auth, setAuth] = useState(initialAuth);
-
-  const setUser = useCallback(newAuth => {
-    localStorage.setItem(LOCAL_STORAGE_AUTH_KEY, JSON.stringify(newAuth));
-    setAuth(newAuth);
-  }, []);
-
   const [messages, setMessages] = useState(initialMessages);
 
   const setLang = useCallback(lang => {
@@ -77,12 +69,10 @@ function AppState({ initialAuth, initialMessages, children }) {
   }, []);
 
   return (
-    <AuthProvider auth={auth} setAuth={setUser}>
-      <I18nProvider messages={messages} onLangChange={setLang}>
-        <ThemeProvider theme={theme}>
-          <ApiProvider api={api}>{children}</ApiProvider>
-        </ThemeProvider>
-      </I18nProvider>
-    </AuthProvider>
+    <I18nProvider messages={messages} onLangChange={setLang}>
+      <ThemeProvider theme={theme}>
+        <ApiProvider api={api}>{children}</ApiProvider>
+      </ThemeProvider>
+    </I18nProvider>
   );
 }
