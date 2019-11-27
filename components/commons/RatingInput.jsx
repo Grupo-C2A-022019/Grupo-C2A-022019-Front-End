@@ -5,7 +5,7 @@ import Box from "@material-ui/core/Box";
 
 import useApi from "hooks/useApi";
 
-export default function SimpleRating({ name }) {
+export default function SimpleRating({ id }) {
   const [value, setValue] = React.useState(2);
   const api = useApi();
 
@@ -18,7 +18,7 @@ export default function SimpleRating({ name }) {
           value={value}
           onChange={(event, newValue) => {
             setValue(newValue);
-            api.rateMenu(name, newValue);
+            api.rateMenu(id, newValue);
           }}
         />
       </Box>

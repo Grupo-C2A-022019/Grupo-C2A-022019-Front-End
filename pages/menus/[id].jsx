@@ -57,7 +57,7 @@ function MenuDetails({ id }) {
                   amount={menu.listPrice.amount}
                 />
               </Grid>
-              <RatingInfo value={menu.puntuacion}/>
+              <RatingInfo value={menu.averageRate}/>
               {menu.discountedPrice && (
                 <Grid item>
                   <Typography>
