@@ -1,16 +1,18 @@
 import App from "next/app";
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect, useMemo } from "react";
 import { ThemeProvider } from "@material-ui/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
 import theme from "components/theme";
-import * as api from "lib/api";
+
 import { ApiProvider } from "contexts/api";
 import { I18nProvider } from "contexts/i18n";
-import { getMessages } from "lib/i18n";
-import initialMessages from "static/messages_es.json";
 
-const LOCAL_STORAGE_AUTH_KEY = "auth";
+import { getMessages } from "lib/i18n";
+import createApi from "lib/api";
+
+import initialMessages from "static/messages_es.json";
+import useUser from "hooks/useUser";
 
 class MyApp extends App {
   static async getInitialProps({ Component, router, ctx }) {
@@ -23,21 +25,6 @@ class MyApp extends App {
     return { pageProps, initialMessages };
   }
 
-  constructor(props) {
-    super(props);
-
-    let initialAuth;
-    if (process.browser) {
-      try {
-        initialAuth = JSON.parse(localStorage.getItem(LOCAL_STORAGE_AUTH_KEY));
-      } catch {}
-    }
-
-    this.state = {
-      auth: initialAuth
-    };
-  }
-
   componentDidMount() {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector("#jss-server-side");
@@ -48,10 +35,9 @@ class MyApp extends App {
 
   render() {
     const { initialMessages, Component, pageProps } = this.props;
-    const { auth } = this.state;
 
     return (
-      <AppState initialAuth={auth} initialMessages={initialMessages}>
+      <AppState initialMessages={initialMessages}>
         <CssBaseline />
         <Component {...pageProps} />
       </AppState>
@@ -61,8 +47,12 @@ class MyApp extends App {
 
 export default MyApp;
 
-function AppState({ initialAuth, initialMessages, children }) {
+function AppState({ initialMessages, children }) {
   const [messages, setMessages] = useState(initialMessages);
+
+  const { user } = useUser();
+  const accessToken = user && user.accessToken;
+  const api = useMemo(() => createApi(accessToken), [accessToken]);
 
   const setLang = useCallback(lang => {
     getMessages(lang).then(setMessages);
