@@ -7,9 +7,11 @@ import ToolBar from "components/ToolBar";
 import I18n from "components/commons/I18n";
 import Image from "components/commons/Image";
 import MenuList from "components/MenuList";
+import OrderList from "components/commons/OrderList";
 
 import useBusiness from "hooks/useBusiness";
 import useBusinessMenus from "hooks/useBusinessMenus";
+import useBusinessOrders from "hooks/useBusinessOrders";
 
 export default function BusinessPage() {
   const {
@@ -31,6 +33,7 @@ export default function BusinessPage() {
 
 function BusinessDetails({ id }) {
   const [business] = useBusiness(id);
+  const [orders] = useBusinessOrders(id);
 
   return (
     <Paper>
@@ -64,6 +67,8 @@ function BusinessDetails({ id }) {
           <Typography>{business.telephone}</Typography>
         </>
       )}
+      {orders &&( <OrderList Orders={orders} />)}
+     
     </Paper>
   );
 }
