@@ -8,6 +8,7 @@ import useApi from "hooks/useApi";
 export default function SimpleRating({ id }) {
   const [value, setValue] = React.useState(2);
   const api = useApi();
+  const [state, setState] = React.useState();
 
   return (
     <div>
@@ -16,9 +17,11 @@ export default function SimpleRating({ id }) {
         <Rating
           name="simple-controlled"
           value={value}
+          disabled={state}
           onChange={(event, newValue) => {
             setValue(newValue);
             api.rateMenu(id, newValue);
+            setState(true);
           }}
         />
       </Box>
