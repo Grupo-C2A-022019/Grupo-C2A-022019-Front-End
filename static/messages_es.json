@@ -26,9 +26,15 @@
   "menu.new.form.bulkSize": "Cantidad minima de descuento",
   "menu.new.form.validity.startingDate": "Disponible desde",
   "menu.new.form.validity.expirationDate": "Disponible hasta",
+  "menus.description.label":"Descripcion",
+  "menus.name.label":"Nombre",
+  "menus.price.label":"Precio",
+
 
   "statement.description.label": "Descripción",
   "statement.amount.label": "Monto",
+
+  "client.saldo":"Saldo",
 
   "back": "Volver"
 }

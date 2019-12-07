@@ -107,7 +107,11 @@ export default function ToolBar() {
           <span>Profile</span>
         </NextLink>
       </MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <NextLink href="/cargarSaldo">
+          <span>Cargar credito</span>
+        </NextLink>
+      </MenuItem>
     </Menu>
   );
 
