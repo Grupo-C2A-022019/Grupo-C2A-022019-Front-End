@@ -23,6 +23,11 @@ export default function HomePage() {
             <I18n id="business.new" />
           </Button>
         </Link>
+        <Link href="/businesses/4">
+          <Button variant="contained" color="primary">
+            <I18n id="business.check" />
+          </Button>
+        </Link>
         <RecentMenus />
         <TrendingMenus />
       </Container>
