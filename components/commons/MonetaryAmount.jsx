@@ -2,24 +2,26 @@ import React from "react";
 import { string, number } from "prop-types";
 import { Typography } from "@material-ui/core";
 
-export default function MonetaryAmount({ lang, currency, amount }) {
+import useI18n from "hooks/useI18n";
+
+export default function MonetaryAmount({ currency, amount }) {
+  const { currentLang } = useI18n();
+
   return (
     <Typography color={amount < 0 ? "error" : "textPrimary"}>
       <b>
-        {new Intl.NumberFormat(lang, { style: "currency", currency }).format(
-          amount
-        )}
+        {new Intl.NumberFormat(currentLang, {
+          style: "currency",
+          currency
+        }).format(amount)}
       </b>
     </Typography>
   );
 }
 
 MonetaryAmount.propTypes = {
-  lang: string,
   currency: string.isRequired,
   amount: number.isRequired
 };
 
-MonetaryAmount.defaultProps = {
-  lang: "es-AR"
-};
+MonetaryAmount.defaultProps = {};

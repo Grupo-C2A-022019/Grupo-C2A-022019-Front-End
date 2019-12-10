@@ -46,9 +46,9 @@ class MyApp extends App {
 
 export default MyApp;
 
-const allLangs = ["es", "en"];
+const allLangs = ["es-AR", "en-US"];
 function AppState({ children }) {
-  const [lang, setLang] = useState("es");
+  const [lang, setLang] = useState(allLangs[0]);
   const [messages, setMessages] = useState({});
 
   const { user } = useUser();
