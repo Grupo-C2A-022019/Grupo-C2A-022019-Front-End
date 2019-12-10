@@ -38,6 +38,12 @@
   "statement.amount.label": "Amount",
 
   "client.saldo":"Balace",
+  
+  "search.label":"Search",
+
+  "toolbar.search":"Search",
+  "toolbar.profile":"Profile",
+  "toolbar.credit":"Credit",
 
   "back": "Back"
 }

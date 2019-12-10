@@ -40,5 +40,11 @@
 
   "client.saldo":"Saldo",
 
+  "search.label":"Buscar",
+
+  "toolbar.search":"Buscar",
+  "toolbar.profile":"Perfil",
+  "toolbar.credit":"Credito",
+
   "back": "Volver"
 }

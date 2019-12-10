@@ -112,7 +112,12 @@ export default function ToolBar() {
       </MenuItem>
       <MenuItem onClick={handleMenuClose}>
         <NextLink href="/cargarSaldo">
-          <span>Cargar credito</span>
+          <I18n id="toolbar.credit" />
+        </NextLink>
+      </MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <NextLink href="/search">
+          <I18n id="toolbar.search" />
         </NextLink>
       </MenuItem>
     </Menu>
