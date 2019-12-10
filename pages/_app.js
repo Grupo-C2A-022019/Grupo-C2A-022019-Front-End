@@ -11,7 +11,6 @@ import { I18nProvider } from "contexts/i18n";
 import { getMessages } from "lib/i18n";
 import createApi from "lib/api";
 
-import initialMessages from "static/messages_es.json";
 import useUser from "hooks/useUser";
 
 class MyApp extends App {
@@ -22,7 +21,7 @@ class MyApp extends App {
       pageProps = await Component.getInitialProps(ctx);
     }
 
-    return { pageProps, initialMessages };
+    return { pageProps };
   }
 
   componentDidMount() {
@@ -34,10 +33,10 @@ class MyApp extends App {
   }
 
   render() {
-    const { initialMessages, Component, pageProps } = this.props;
+    const { Component, pageProps } = this.props;
 
     return (
-      <AppState initialMessages={initialMessages}>
+      <AppState>
         <CssBaseline />
         <Component {...pageProps} />
       </AppState>
@@ -47,19 +46,26 @@ class MyApp extends App {
 
 export default MyApp;
 
-function AppState({ initialMessages, children }) {
-  const [messages, setMessages] = useState(initialMessages);
+const allLangs = ["es", "en"];
+function AppState({ children }) {
+  const [lang, setLang] = useState("es");
+  const [messages, setMessages] = useState({});
 
   const { user } = useUser();
   const accessToken = user && user.accessToken;
   const api = useMemo(() => createApi(accessToken), [accessToken]);
 
-  const setLang = useCallback(lang => {
+  useEffect(() => {
     getMessages(lang).then(setMessages);
-  }, []);
+  }, [lang]);
 
   return (
-    <I18nProvider messages={messages} onLangChange={setLang}>
+    <I18nProvider
+      messages={messages}
+      langs={allLangs}
+      currentLang={lang}
+      onLangChange={setLang}
+    >
       <ThemeProvider theme={theme}>
         <ApiProvider api={api}>{children}</ApiProvider>
       </ThemeProvider>

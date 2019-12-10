@@ -1,0 +1,42 @@
+{
+  "language.es": "Spanish",
+  "language.en": "English",
+
+  "recentMenus.title": "New delicities",
+  "trendingMenus.title": "Trending",
+  "menuList.loading": "Gattering Menuses...",
+
+  "business.new": "Open a shop",
+  "business.menu.new.label": "Publish",
+  
+  "business.urlServ.label": "Vendor page",
+  "business.email.label": "Contact email",
+  "business.schedule.label": "Schedule",
+  "business.telephone.label": "Phone",
+
+  "business.new.form.name": "Name",
+  
+  "menu.new": "Publish",
+  "menu.order": "Order!",
+
+  "menu.listPrice.label": "List price",
+  "menu.discountedPrice.label": "Special discount",
+
+  "menu.new.form.name": "Name",
+  "menu.new.form.img": "Image",
+  "menu.new.form.buiness": "Service",
+  "menu.new.form.price": "Price",
+  "menu.new.form.bulkSize": "Minimum discount amount",
+  "menu.new.form.validity.startingDate": "Available from",
+  "menu.new.form.validity.expirationDate": "Available to",
+  "menus.description.label":"Description",
+  "menus.name.label":"Name",
+  "menus.price.label":"Price",
+
+  "statement.description.label": "Description",
+  "statement.amount.label": "Amount",
+
+  "client.saldo":"Balace",
+
+  "back": "Back"
+}

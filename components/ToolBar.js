@@ -15,6 +15,7 @@ import MoreIcon from "@material-ui/icons/MoreVert";
 import NextLink from "next/link";
 
 import I18n from "components/commons/I18n";
+import LanguageSelector from "components/LanguageSelector";
 
 import routes from "constants/routes";
 
@@ -104,7 +105,9 @@ export default function ToolBar() {
     >
       <MenuItem onClick={handleMenuClose}>
         <NextLink href="/perfil">
-          <span>Profile</span>
+          <span>
+            <I18n id="toolbar.profile" />
+          </span>
         </NextLink>
       </MenuItem>
       <MenuItem onClick={handleMenuClose}>
@@ -153,7 +156,9 @@ export default function ToolBar() {
           <AccountCircle />
         </IconButton>
         <NextLink href="/perfil">
-          <span>Profile</span>
+          <span>
+            <I18n id="toolbar.profile" />
+          </span>
         </NextLink>
       </MenuItem>
     </Menu>
@@ -182,6 +187,7 @@ export default function ToolBar() {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
+            <LanguageSelector />
             <IconButton
               edge="end"
               aria-label="account of current user"
