@@ -42,7 +42,8 @@
 
   "search.label":"Buscar",
 
-  "toolbar.search":"Buscar",
+  "toolbar.search.menus":"Buscar Menus",
+  "toolbar.search.business":"Buscar Negocios",
   "toolbar.profile":"Perfil",
   "toolbar.credit":"Credito",
 

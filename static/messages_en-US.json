@@ -41,7 +41,8 @@
   
   "search.label":"Search",
 
-  "toolbar.search":"Search",
+  "toolbar.search.menu":"Search Menus",
+  "toolbar.search.business":"Search Business",
   "toolbar.profile":"Profile",
   "toolbar.credit":"Credit",
 
